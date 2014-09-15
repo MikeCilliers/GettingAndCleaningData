@@ -66,4 +66,4 @@ trainDS <- createDataSet("train")
 DS <- rbind(testDS, trainDS)
 
 ## A second, independent tidy data set, tidyDS, with the average of each variable for each activity and each subject
-tidyDS %>% group_by(Subject, Activity) %.% summarise_each(funs(mean))
+tidyDS <- DS %>% group_by(Subject, Activity) %.% summarise_each(funs(mean))
