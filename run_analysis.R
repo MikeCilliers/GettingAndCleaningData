@@ -14,7 +14,7 @@ setwd("~/R/workspace/getCleanData/Assignment/UCI HAR Dataset")
 
 currwd <- getwd()
 
-library(dplyr)
+suppressMessages(library(dplyr))
 #Get the activity lables
  activityLables.tbl <- tbl_df(read.table("activity_labels.txt", header = FALSE, col.names = c("ActivityId", "Activity")))
 #Get the column names for the sensor measurements datasets
@@ -28,13 +28,13 @@ library(dplyr)
  
 createDataSet <- function (dataType) {
  
-	#Get the test data
+	#Get the data set for a particular dataType; either test or train
 	 readdir <- paste(currwd, "/", dataType, sep="")
 	 setwd(readdir)
 	
 	 filename <- paste("X_", dataType, ".txt", sep = "")
 	 data.tbl <- tbl_df(read.table(filename, header = FALSE, col.names = columnNames))
-	 ## Extracts only the measurements on the mean and standard deviation for each measurement.
+	 ## Extract only the measurements on the mean and standard deviation for each measurement.
 	 data.tbl <- data.tbl[ ,columnNums]
 	 data.tbl <- mutate(data.tbl, rowId = row_number())
 	 filename <- paste("subject_", dataType, ".txt", sep = "")
@@ -66,4 +66,4 @@ trainDS <- createDataSet("train")
 DS <- rbind(testDS, trainDS)
 
 ## A second, independent tidy data set, tidyDS, with the average of each variable for each activity and each subject
-tidyDS <- DS %>% group_by(Subject, Activity) %.% summarise_each(funs(mean))
+tidyDS <- DS %>% group_by(Subject, Activity) %>% summarise_each(funs(mean))
