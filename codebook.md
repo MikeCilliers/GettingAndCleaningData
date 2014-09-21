@@ -11,13 +11,14 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 
 How the tidy dataset, tidyDS.txt, was prepared
 ===================================================================================================================================================
-The columns names for the training and test sets is provided in the features.txt and is read into a dplyr library data table. All the rows are filter for columns names containing either std or mean. The row numbers of these fields are stored in a vector. The activity_labels.txt is read into a data table and is used to replace the activity id by the actual activity.
+The dplyr package is used to analyse the data.
+The columns names for the training and test sets is provided in the features.txt and is read into a dplyr library data table. All the rows are filter for columns names containing either std or mean, using the dplyr filter function. The row numbers of these fields are stored in a vector. The activity_labels.txt is read into a data table and is used to replace the activity id by the actual activity.
 
-A function, createDataSet, is used to create the dataset for a particular dataset type, e.g. train or test. The function first reads the data into a data table and extracts only those columns which contain either std or mean by using the row number vector. The function then gets the subject id for each row of the data, thereafter it gets the activity id for each row of the data. The three tables are then joined to provide a data set which has the subject, the activity and then the standard deviation or mean columns.
+A function, createDataSet, is used to create the dataset for a particular dataset type, e.g. train or test. The function first reads the data into a data table and extracts only those columns which contain either std or mean by using the row number vector. The function then gets the subject id for each row of the data, thereafter it gets the activity id for each row of the data. The three tables are then joined, using the dplyr inner_join function, to provide a data set which has the subject, the activity and then the standard deviation or mean columns.
 
-A test dataset, testDS, is created by calling the function, createDataSet, with parameter test. Similarly the train dataset, trainDS, is created. The two datasets are then merged to form one tidy dataset, DS.
+A test dataset, testDS, is created by calling the function, createDataSet, with parameter test. Similarly the train dataset, trainDS, is created using parameter train. The two datasets are then merged, using rbind, to form one tidy dataset, DS.
 
-The tidy dataset, tidyDS, is an independent tidy data set with the average of each variable for each activity and each subject of the tidy dataset DS.
+The tidy dataset, tidyDS, is an independent tidy data set with the average of each variable for each activity and each subject of the tidy dataset DS. The dataset DS are grouped by Subject and Activity, using the dplyr group_by function, and then the average of each variable is calculated using the dplyr summarise_each(funs(mean)) command.
 
 Field names of the tidy dataset, tidyDS.txt
 =================================================================================================================================================== 
