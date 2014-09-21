@@ -22,7 +22,9 @@ The tidy dataset, tidyDS, is an independent tidy data set with the average of ea
 Field names of the tidy dataset, tidyDS.txt
 =================================================================================================================================================== 
 Subject
+	An integer identifier of the subject who carried out the experiment, values ranging from 1 to 30
 Activity
+	One of six activities: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
 tBodyAcc-mean...X               
 tBodyAcc-mean...Y               
 tBodyAcc-mean...Z               
@@ -51,7 +53,7 @@ tBodyGyroJerk-mean...X
 tBodyGyroJerk-mean...Y          
 tBodyGyroJerk-mean...Z          
 tBodyGyroJerk-std...X          
-[29] tBodyGyroJerk-std...Y           
+tBodyGyroJerk-std...Y           
 tBodyGyroJerk-std...Z           
 tBodyAccMag-mean()              
 tBodyAccMag-std()              
